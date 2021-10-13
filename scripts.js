@@ -29,12 +29,11 @@ submit.addEventListener("click", () => {
 function updateTable() {
     const newRow = document.createElement("TR");
     table.append(newRow);
-    for (i = myLibrary.length-1; i < myLibrary.length; i++) {
+    for (i = myLibrary.length - 1; i < myLibrary.length; i++) {
         table.innerHTML +=
             "<tr>" + "<td>" + myLibrary[i].title + "</td>" +
             "<td>" + myLibrary[i].author + "</td>" +
             "<td>" + myLibrary[i].read + "</td>" +
-            "<td>" + myLibrary[i].title + "</td>" +
             "<td>" + '<i class="fas fa-trash-alt"></i>' + "</td>" +
             "</tr>"
     }
@@ -44,8 +43,10 @@ body.addEventListener('click', (event) => {
     if (event.target.tagName.toLowerCase() === 'i') {
         const row = event.target.parentNode.parentNode
         row.remove();
+        const titleCell = row.getElementsByTagName("td")[0].textContent;
+        const bookIndex = myLibrary.findIndex(x => x.title === titleCell);
+        myLibrary.splice(bookIndex, 1);
     }
-}); 
-
+});
 
 
