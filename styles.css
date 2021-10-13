@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 
 body {
     margin:0;
     padding:75px 500px;
-    font-family: 'Merriweather', serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 .text-input {
@@ -24,7 +24,7 @@ body {
 }
 
 .submit-button{
-    font-family: 'Merriweather', serif;
+    font-family: 'Poppins', sans-serif;
     height:40px;
     width:79px;
     padding:6px;
@@ -33,4 +33,13 @@ body {
 table {
     width:100%;
     margin-top:60px;
+}
+
+i:hover {
+    cursor: pointer;
+}
+
+i:active {
+    transform: scale(0.75);
+    transition-duration: 125ms;
 }
