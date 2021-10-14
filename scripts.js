@@ -1,9 +1,9 @@
-const body = document.querySelector("body");
 const bookField = document.getElementById("book");
 const authorField = document.getElementById("author");
 const readField = document.getElementById("read");
 const submit = document.getElementById("submit");
 const table = document.querySelector(".book-table");
+const readButton = document.querySelector(".read-button")
 
 let myLibrary = [];
 
@@ -23,6 +23,10 @@ function addBookToLibrary() {
 };
 
 submit.addEventListener("click", () => {
+    if (bookField.value === "" || authorField.value === "") {
+        alert("Please fill in both fields");
+        return;
+    };
     addBookToLibrary();
 });
 
@@ -33,20 +37,33 @@ function updateTable() {
         table.innerHTML +=
             "<tr>" + "<td>" + myLibrary[i].title + "</td>" +
             "<td>" + myLibrary[i].author + "</td>" +
-            "<td>" + myLibrary[i].read + "</td>" +
-            "<td>" + '<i class="fas fa-trash-alt"></i>' + "</td>" +
+            "<td>" + `<input type=button class="read-button button" value="${myLibrary[i].read}"></button>` + "</td>" +
+            "<td>" + `<input type=button class="delete-button button" value="delete"></button>` + "</td>" +
             "</tr>"
     }
+
 };
 
-body.addEventListener('click', (event) => {
-    if (event.target.tagName.toLowerCase() === 'i') {
-        const row = event.target.parentNode.parentNode
+table.addEventListener('click', (event) => {
+    const row = event.target.parentNode.parentNode
+    const titleCell = row.getElementsByTagName("td")[0].textContent;
+    const bookIndex = myLibrary.findIndex(x => x.title === titleCell);
+
+    if (event.target.classList.contains("delete-button")) {
         row.remove();
-        const titleCell = row.getElementsByTagName("td")[0].textContent;
-        const bookIndex = myLibrary.findIndex(x => x.title === titleCell);
         myLibrary.splice(bookIndex, 1);
     }
+
+    if (event.target.classList.contains("read-button")) {
+        if (event.target.value === "Read") {
+            event.target.value = "Not read";
+            myLibrary[bookIndex].read = "Not Read";
+            return;
+        }
+        event.target.value = "Read"
+        myLibrary[bookIndex].read = "Read";
+        return;
+    };
 });
 
 
