@@ -3,7 +3,10 @@ const authorField = document.getElementById("author");
 const readField = document.getElementById("read");
 const submit = document.getElementById("submit");
 const table = document.querySelector(".book-table");
-const readButton = document.querySelector(".read-button")
+const readButton = document.querySelector(".read-button");
+const newBookButton = document.querySelector(".new-book-button");
+const closeButton = document.querySelector(".close-button")
+const modal = document.querySelector(".modal-bg");
 
 let myLibrary = [];
 
@@ -16,7 +19,12 @@ function Book(title, author, read) {
 function addBookToLibrary() {
     const title = bookField.value;
     const author = authorField.value;
-    const read = readField.value;
+    let read;
+    if (readField.checked) {
+        read = "Read"
+    }else{
+        read = "Not Read"
+    }
     const newBook = new Book(title, author, read);
     myLibrary.push(newBook);
     updateTable();
@@ -28,7 +36,10 @@ submit.addEventListener("click", () => {
         return;
     };
     addBookToLibrary();
-});
+    bookField.value = "";
+    authorField.value = "";
+    readField.checked = false;
+}); 
 
 function updateTable() {
     const newRow = document.createElement("TR");
@@ -41,7 +52,6 @@ function updateTable() {
             "<td>" + `<input type=button class="delete-button button" value="delete"></button>` + "</td>" +
             "</tr>"
     }
-
 };
 
 table.addEventListener('click', (event) => {
@@ -60,10 +70,24 @@ table.addEventListener('click', (event) => {
             myLibrary[bookIndex].read = "Not Read";
             return;
         }
+
         event.target.value = "Read"
         myLibrary[bookIndex].read = "Read";
         return;
-    };
+    }
 });
 
+newBookButton.addEventListener("click", () => {
+    modal.style.display = "flex";
+});
+
+closeButton.addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+document.addEventListener("click", (event) => {
+    if (!event.target.closest(".modal-content") && !event.target.classList.contains("new-book-button")) {
+        modal.style.display="none";
+    }
+});
 

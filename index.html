@@ -11,34 +11,44 @@
 </head>
 
 <body>
-    <header>
-        <h1>My Book Library</h1>
-    </header>
+    <div class="container">
 
-    <main>
+        <header>
+            <h1>My Book Library</h1>
+        </header>
 
-        <form>
-            <input type=text id="book" class="text-input">
-            <label for="book">Book</label>
-            <input type=text id="author" class="text-input">
-            <label for="author">Author</label>
-            <select id="read" class="dropdown">
-                <option value="Read">Read</option>
-                <option value="Not Read">Not Read</option>
-            </select>
-            <label for="read">Read Yet?</label>
-            <input type="button" id="submit" value="submit" class="submit-button button">
-            <label for="submit"></label>
-        </form>
+        <main>
 
-        <table class="book-table">
-            <tr>
-                <th>Book</th>
-                <th>Author</th>
-                <th>Read</th>
-                <th>Remove</th>
-            </tr>
-        </table>
+            <div class="modal-bg">
+                <div class="modal-content">
+                    <h1 class="modal-heading">Add a Book</h1>
+                    <span><i class="fas fa-times close-button"></i></span>
+                    <form>
+                        <input type=text id="book" class="text-input" placeholder="Title">
+                        <input type=text id="author" class="text-input" placeholder="Author">
+                        <label for="read">Read Yet?</label>
+                        <input type="checkbox" id="read" class="checkbox">
+                        <input type="button" id="submit" value="submit" class="submit-button button">
+                        <label for="submit"></label>
+                    </form>
+                </div>
+            </div>
+
+            <input type="button" id="new book" value="new book" class="new-book-button button">
+            <label for="new book"></label>
+
+            <div style="overflow-x:auto;">
+                <table class="book-table">
+                    <tr>
+                        <th>Book</th>
+                        <th>Author</th>
+                        <th>Read</th>
+                        <th>Remove</th>
+                    </tr>
+                </table>
+            </div>
+    </div>
+
 
     </main>
 
