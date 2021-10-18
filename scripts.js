@@ -5,8 +5,11 @@ const submit = document.getElementById("submit");
 const table = document.querySelector(".book-table");
 const readButton = document.querySelector(".read-button");
 const newBookButton = document.querySelector(".new-book-button");
-const closeButton = document.querySelector(".close-button")
+const closeButton = document.querySelector(".close-button");
 const modal = document.querySelector(".modal-bg");
+const totalBooks = document.querySelector(".total-books");
+const completedBooks = document.querySelector(".completed-books");
+const incompleteBooks = document.querySelector(".incomplete-books");
 
 let myLibrary = [];
 
@@ -22,7 +25,7 @@ function addBookToLibrary() {
     let read;
     if (readField.checked) {
         read = "Read"
-    }else{
+    } else {
         read = "Not Read"
     }
     const newBook = new Book(title, author, read);
@@ -39,7 +42,7 @@ submit.addEventListener("click", () => {
     bookField.value = "";
     authorField.value = "";
     readField.checked = false;
-}); 
+});
 
 function updateTable() {
     const newRow = document.createElement("TR");
@@ -52,6 +55,7 @@ function updateTable() {
             "<td>" + `<input type=button class="delete-button button" value="delete"></button>` + "</td>" +
             "</tr>"
     }
+    updateStatistics();
 };
 
 table.addEventListener('click', (event) => {
@@ -62,18 +66,18 @@ table.addEventListener('click', (event) => {
     if (event.target.classList.contains("delete-button")) {
         row.remove();
         myLibrary.splice(bookIndex, 1);
+        updateStatistics();
     }
 
     if (event.target.classList.contains("read-button")) {
         if (event.target.value === "Read") {
             event.target.value = "Not read";
             myLibrary[bookIndex].read = "Not Read";
-            return;
+        } else {
+            event.target.value = "Read";
+            myLibrary[bookIndex].read = "Read";
         }
-
-        event.target.value = "Read"
-        myLibrary[bookIndex].read = "Read";
-        return;
+        updateStatistics();
     }
 });
 
@@ -87,7 +91,26 @@ closeButton.addEventListener("click", () => {
 
 document.addEventListener("click", (event) => {
     if (!event.target.closest(".modal-content") && !event.target.classList.contains("new-book-button")) {
-        modal.style.display="none";
+        modal.style.display = "none";
     }
 });
+
+function updateStatistics() {
+    let completed = 0;
+    let incomplete = 0;
+
+    for (i = 0; i < myLibrary.length; i++) {
+        if (myLibrary[i].read === "Read") {
+            completed++;
+        }
+
+        if (myLibrary[i].read === "Not Read") {
+            incomplete++;
+        }
+    }
+
+    totalBooks.textContent = `Total Books: ${myLibrary.length}`;
+    completedBooks.textContent = `Completed Books: ${completed}`;
+    incompleteBooks.textContent = `Incomplete Books: ${incomplete}`;
+};
 

@@ -13,7 +13,7 @@ body {
 .container {
   margin: 0 auto;
   padding: 5% 5%;
-  max-width:960px;
+  max-width:1100px;
 }
 
 .text-input {
@@ -121,10 +121,6 @@ i:active {
   margin: 20px auto 0;
 }
 
-.new-book-button {
-  margin: 18.56px 0 0 0;
-}
-
   .modal-bg {
     position: fixed;
     top: 0;
@@ -163,4 +159,30 @@ i:active {
 
   .checkbox {
     float: right;
+  }
+
+  .statistics-container {
+    background-color: white;
+    color:black;
+    font-weight:600;
+    transform: skewX(-20deg);
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0 0 30px;
+    height: fit-content;
+  }
+
+  .statistics-container p {
+    transform: skewX(20deg);
+    margin:0 10px;
+  }
+
+  .heading-container {
+    display: flex;
+    margin: 0 0 20px 0;
+  }
+
+  .heading {
+    margin: 0 0 15px 0;
   }

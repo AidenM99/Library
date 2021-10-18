@@ -14,7 +14,16 @@
     <div class="container">
 
         <header>
-            <h1>My Book Library</h1>
+            <div class="heading-container">
+                <h1 class="heading">My Book Library</h1>
+                <div class="statistics-container">
+                    <p class="total-books">Total Books: 0</p>
+                    <p class="completed-books">Completed Books: 0</p>
+                    <p class="incomplete-books">Incomplete Books: 0</p>
+                </div>
+            </div>
+            <input type="button" id="new book" value="new book" class="new-book-button button">
+            <label for="new book"></label>
         </header>
 
         <main>
@@ -34,9 +43,6 @@
                 </div>
             </div>
 
-            <input type="button" id="new book" value="new book" class="new-book-button button">
-            <label for="new book"></label>
-
             <div style="overflow-x:auto;">
                 <table class="book-table">
                     <tr>
@@ -48,7 +54,6 @@
                 </table>
             </div>
     </div>
-
 
     </main>
 
