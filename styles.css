@@ -1,13 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background-color: #a4508b;
-    background-image: linear-gradient(326deg, #a4508b 0%, #5f0a87 74%);
-    color: #FFFFFF;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: #EDC7B7;
+    color: #123C69;
 }
 
 .container {
@@ -64,12 +63,12 @@ i:active {
   border-radius: .25rem;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   box-sizing: border-box;
-  color: rgba(0, 0, 0, 0.85);
+  color: #AC3B61; 
   cursor: pointer;
   display: inline-flex;
   font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: bold;
   justify-content: center;
   line-height: 1.25;
   margin: 0;
@@ -83,8 +82,8 @@ i:active {
   touch-action: manipulation;
   vertical-align: baseline;
   width: auto;
-  letter-spacing: 2px;
-    text-transform: uppercase;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .button:hover,
@@ -97,18 +96,10 @@ i:active {
   transform: translateY(-1px);
 }
 
-.button:active {
-    background-color: #F0F0F1;
-    border-color: rgba(0, 0, 0, 0.15);
-    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-    color: rgba(0, 0, 0, 0.65);
-    transform: translateY(0);
-  }
-
-  .close-button {
-    position: absolute;
-    right: 9px;
-    top:7px;
+.close-button {
+  position: absolute;
+  right: 9px;
+  top:7px;
 }
 
 .close-button:hover {
@@ -119,6 +110,13 @@ i:active {
 .submit-button {
   display: block;
   margin: 20px auto 0;
+  background-color: #AC3B61;
+  color: #FFFFFF;
+}
+
+.new-book-button {
+  background-color: #AC3B61;
+  color: #FFFFFF;
 }
 
   .modal-bg {
@@ -136,16 +134,17 @@ i:active {
 
   .modal-content {
     position:relative;
-    background-color: #FFFFFF;
-    color: rgba(0, 0, 0, 0.85);
+    background-color: #123C69;
+    color: #FFFFFF; 
     min-width:384px;
     display:flex;
     justify-content: space-around;
     align-items: center;
     flex-direction: column;
     border-radius: 10px;
-    border: solid rgba(0, 0, 0, 0.85) 1px;
+    border: solid #EDC7B7 1.5px;
     padding: 50px 10px;
+    font-weight: bold;
   }
 
   .modal-heading {
@@ -162,25 +161,26 @@ i:active {
   }
 
   .statistics-container {
-    background-color: white;
-    color:black;
+    background-color: #EDC7B7;
+    color: #AC3B61; 
     font-weight:600;
-    transform: skewX(-20deg);
-    border: 1px solid black;
+    border: 2px solid #123C69;
+    border-left: none;
+    border-right: none;
     display: flex;
     justify-content: space-between;
-    margin: 15px 0 0 30px;
+    margin: 10px 0 0 30px;
     height: fit-content;
   }
 
   .statistics-container p {
-    transform: skewX(20deg);
     margin:0 10px;
   }
 
   .heading-container {
     display: flex;
     margin: 0 0 20px 0;
+    color: #AC3B61;
   }
 
   .heading {

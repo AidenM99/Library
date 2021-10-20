@@ -8,10 +8,15 @@ const newBookButton = document.querySelector(".new-book-button");
 const closeButton = document.querySelector(".close-button");
 const modal = document.querySelector(".modal-bg");
 const totalBooks = document.querySelector(".total-books");
-const completedBooks = document.querySelector(".completed-books");
-const incompleteBooks = document.querySelector(".incomplete-books");
+const readBooks = document.querySelector(".completed-books");
+const unreadBooks = document.querySelector(".incomplete-books");
 
 let myLibrary = [];
+
+window.addEventListener("load", () => {
+    retrieveStorage();
+    updateStatistics();
+});
 
 function Book(title, author, read) {
     this.title = title;
@@ -31,6 +36,7 @@ function addBookToLibrary() {
     const newBook = new Book(title, author, read);
     myLibrary.push(newBook);
     updateTable();
+    populateStorage();
 };
 
 submit.addEventListener("click", () => {
@@ -67,6 +73,7 @@ table.addEventListener('click', (event) => {
         row.remove();
         myLibrary.splice(bookIndex, 1);
         updateStatistics();
+        populateStorage();
     }
 
     if (event.target.classList.contains("read-button")) {
@@ -78,6 +85,7 @@ table.addEventListener('click', (event) => {
             myLibrary[bookIndex].read = "Read";
         }
         updateStatistics();
+        populateStorage();
     }
 });
 
@@ -110,7 +118,23 @@ function updateStatistics() {
     }
 
     totalBooks.textContent = `Total Books: ${myLibrary.length}`;
-    completedBooks.textContent = `Completed Books: ${completed}`;
-    incompleteBooks.textContent = `Incomplete Books: ${incomplete}`;
+    readBooks.textContent = `Read Books: ${completed}`;
+    unreadBooks.textContent = `Unread Books: ${incomplete}`;
 };
 
+function populateStorage() {
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+};
+
+function retrieveStorage() {
+    var retrieveObject = JSON.parse(localStorage.getItem("myLibrary"));
+    myLibrary = retrieveObject.slice(0);
+    for (i = 0; i < retrieveObject.length; i++) {
+        table.innerHTML +=
+            "<tr>" + "<td>" + retrieveObject[i].title + "</td>" +
+            "<td>" + retrieveObject[i].author + "</td>" +
+            "<td>" + `<input type=button class="read-button button" value="${retrieveObject[i].read}"></button>` + "</td>" +
+            "<td>" + `<input type=button class="delete-button button" value="delete"></button>` + "</td>" +
+            "</tr>"
+    }
+};
