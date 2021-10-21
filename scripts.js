@@ -1,6 +1,6 @@
 const bookField = document.getElementById("book");
 const authorField = document.getElementById("author");
-const readField = document.getElementById("read");
+const readField = document.getElementById("read-yet");
 const submit = document.getElementById("submit");
 const table = document.querySelector(".book-table");
 const readButton = document.querySelector(".read-button");
@@ -10,6 +10,7 @@ const modal = document.querySelector(".modal-bg");
 const totalBooks = document.querySelector(".total-books");
 const readBooks = document.querySelector(".completed-books");
 const unreadBooks = document.querySelector(".incomplete-books");
+const filterButtons = document.querySelectorAll(".filter");
 
 let myLibrary = [];
 
@@ -55,7 +56,7 @@ function updateTable() {
     table.append(newRow);
     for (i = myLibrary.length - 1; i < myLibrary.length; i++) {
         table.innerHTML +=
-            "<tr>" + "<td>" + myLibrary[i].title + "</td>" +
+            "<tr class='table-item'>" + "<td>" + myLibrary[i].title + "</td>" +
             "<td>" + myLibrary[i].author + "</td>" +
             "<td>" + `<input type=button class="read-button button" value="${myLibrary[i].read}"></button>` + "</td>" +
             "<td>" + `<input type=button class="delete-button button" value="delete"></button>` + "</td>" +
@@ -78,7 +79,7 @@ table.addEventListener('click', (event) => {
 
     if (event.target.classList.contains("read-button")) {
         if (event.target.value === "Read") {
-            event.target.value = "Not read";
+            event.target.value = "Not Read";
             myLibrary[bookIndex].read = "Not Read";
         } else {
             event.target.value = "Read";
@@ -131,10 +132,29 @@ function retrieveStorage() {
     myLibrary = retrieveObject.slice(0);
     for (i = 0; i < retrieveObject.length; i++) {
         table.innerHTML +=
-            "<tr>" + "<td>" + retrieveObject[i].title + "</td>" +
+            "<tr class='table-item'>" + "<td>" + retrieveObject[i].title + "</td>" +
             "<td>" + retrieveObject[i].author + "</td>" +
             "<td>" + `<input type=button class="read-button button" value="${retrieveObject[i].read}"></button>` + "</td>" +
             "<td>" + `<input type=button class="delete-button button" value="delete"></button>` + "</td>" +
             "</tr>"
     }
 };
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+        const filter = event.target.id;
+        const tableItem = document.querySelectorAll(".table-item");
+
+        tableItem.forEach(item => {
+            if (filter === "all") {
+                item.style.display = "table-row";
+            } else if (item.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.value == filter) {
+                item.style.display = "table-row";
+            } else {
+                item.style.display = "none";
+            }
+        })
+    })
+});
+
+
