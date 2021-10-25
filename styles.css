@@ -186,3 +186,8 @@ i:active {
   .heading {
     margin: 0 0 15px 0;
   }
+
+  .active {
+    background-color: #AC3B61;
+    color: #FFFFFF;
+  }
