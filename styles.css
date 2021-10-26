@@ -111,6 +111,7 @@ tr {
 .close-button:hover {
   transform:scale(1.5);
   transition: 300ms;
+  cursor: pointer;
 }
 
 .submit-button {
@@ -135,6 +136,8 @@ tr {
 
 .modal-button:hover {
   cursor: pointer;
+  transform: scale(1.2);
+  transition: 300ms;
 }
 
 .modal-button:active {
@@ -231,5 +234,16 @@ tr {
       bottom:0;
       right:0;
       margin: 0px 5px 3px 0;
+    }
+  }
+
+  @media (max-width:450px) {
+    .filter-button {
+      width: 80px;
+      font-size: 12px;
+    }
+
+    .modal-content {
+      min-width:330px;
     }
   }
