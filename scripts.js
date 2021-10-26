@@ -17,7 +17,7 @@ const modalButton = document.querySelector(".modal-button");
 let firstLoad = true;
 
 
-let myLibrary = [];
+let myLibrary;
 
 
 window.addEventListener("load", () => {
@@ -33,8 +33,11 @@ function populateStorage() {
 
 
 function retrieveStorage() {
-    var retrieveObject = JSON.parse(localStorage.getItem("myLibrary"));
-    myLibrary = retrieveObject;
+    if (localStorage.getItem("myLibrary")) {
+        myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+    } else {
+        myLibrary = [];
+    }
     updateTable();
 };
 
