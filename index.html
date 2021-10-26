@@ -22,14 +22,16 @@
                     <p class="incomplete-books">Unread Books: 0</p>
                 </div>
             </div>
-            <input type="button" id="new book" value="new book" class="new-book-button button">
-            <label for="new book"></label>
-            <input type="button" id="all" value="All" class="filter button active">
-            <label for="filter all"></label>
-            <input type="button" id="Read" value="Read" class="filter button">
-            <label for="filter read"></label>
-            <input type="button" id="Not Read" value="Unread" class="filter button">
-            <label for="filter unread"></label>
+            <div class="buttons-container">
+                <input type="button" id="new book" value="new book" class="new-book-button button">
+                <label for="new book"></label>
+                <input type="button" id="all" value="All" class="filter-button button active">
+                <label for="filter all"></label>
+                <input type="button" id="Read" value="Read" class="filter-button button">
+                <label for="filter read"></label>
+                <input type="button" id="Not Read" value="Unread" class="filter-button button">
+                <label for="filter unread"></label>
+            </div>
         </header>
 
         <main>
@@ -40,13 +42,13 @@
                     <span><i class="fas fa-times close-button"></i></span>
                     <form>
                         <label for="book"></label>
-                        <input type=text id="book" class="text-input" placeholder="Title">
+                        <input type="text" id="book" class="text-input" placeholder="Title" required>
                         <label for="author"></label>
-                        <input type=text id="author" class="text-input" placeholder="Author">
+                        <input type="text" id="author" class="text-input" placeholder="Author" required>
                         <label for="read-yet">Read Yet?</label>
                         <input type="checkbox" id="read-yet" class="checkbox">
                         <label for="submit"></label>
-                        <input type="button" id="submit" value="submit" class="submit-button button">
+                        <input type="submit" id="submit" value="submit" class="submit-button button">
                     </form>
                 </div>
             </div>
@@ -62,7 +64,7 @@
                 </table>
             </div>
     </div>
-
+    <i class="fas fa-plus-square fa-2x modal-button"></i>
     </main>
 
     <script src=scripts.js></script>

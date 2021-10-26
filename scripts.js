@@ -10,7 +10,10 @@ const modal = document.querySelector(".modal-bg");
 const totalBooks = document.querySelector(".total-books");
 const readBooks = document.querySelector(".completed-books");
 const unreadBooks = document.querySelector(".incomplete-books");
-const filterButtons = document.querySelectorAll(".filter");
+const filterButtons = document.querySelectorAll(".filter-button");
+const modalButton = document.querySelector(".modal-button");
+
+
 let firstLoad = true;
 
 
@@ -66,10 +69,12 @@ function updateTable() {
     const newRow = document.createElement("TR");
 
     table.append(newRow);
+
+    // Change 'i' value if loading from local storage
     if (firstLoad) {
         i = 0;
     } else {
-        i = myLibrary.length-1;
+        i = myLibrary.length - 1;
     };
 
     for (i; i < myLibrary.length; i++) {
@@ -84,7 +89,7 @@ function updateTable() {
     updateStatistics();
 };
 
-
+// Count amount of books with 'read' and 'not read' in library array
 function updateStatistics() {
     let completed = 0;
     let incomplete = 0;
@@ -106,6 +111,7 @@ function updateStatistics() {
 
 
 table.addEventListener('click', (event) => {
+    //Target first 'td' in specified row to get book title and locate it in library array to retrieve obj index
     const row = event.target.parentNode.parentNode
     const titleCell = row.getElementsByTagName("td")[0].textContent;
     const bookIndex = myLibrary.findIndex(x => x.title === titleCell);
@@ -127,43 +133,67 @@ table.addEventListener('click', (event) => {
         }
         updateStatistics();
         populateStorage();
+        updateFilters();
     };
 });
 
 
 filterButtons.forEach(button => {
     button.addEventListener("click", (event) => {
-        const filter = event.target.id;
-        const tableItem = document.querySelectorAll(".table-item");
-
-        for (i = 0; i < filterButtons.length; i++) {
-            filterButtons[i].classList.remove("active");
-        };
-
-        button.classList.add("active");
-
-        tableItem.forEach(item => {
-            if (filter === "all") {
-                item.style.display = "table-row";
-            } else if (item.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.textContent == filter) {
-                item.style.display = "table-row";
-            } else {
-                item.style.display = "none";
-            }
-        })
+        updateFilters(event, button);
     })
 });
 
 
+function updateFilters(event, button) {
+    let filter;
+
+    // 'event' and 'button' only passed if function is called from filter buttons
+    if (event) {
+        filter = event.target.id;
+    } else {
+        for (i = 0; i < filterButtons.length; i++) {
+            if (filterButtons[i].classList.contains("active")) {
+                filter = filterButtons[i].id;
+            }
+        }
+    };
+
+    if (button) {
+        for (i = 0; i < filterButtons.length; i++) {
+            filterButtons[i].classList.remove("active");
+        }
+        button.classList.add("active");
+    };
+
+    const tableItem = document.querySelectorAll(".table-item");
+
+    tableItem.forEach(item => {
+        const readButtonText = item.firstElementChild.nextElementSibling.nextElementSibling.firstElementChild.textContent; // Retrieve text content of read buttons
+        if (filter === "all") {
+            item.style.display = "table-row";
+        } else if (readButtonText == filter) {
+            item.style.display = "table-row";
+        } else {
+            item.style.display = "none";
+        }
+    });
+};
+
+
 submit.addEventListener("click", () => {
     if (bookField.value === "" || authorField.value === "") {
-        alert("Please fill in both fields");
         return;
     };
     addBookToLibrary();
     bookField.value = "";
     authorField.value = "";
     readField.checked = false;
+});
+
+
+modalButton.addEventListener("click", () => {
+    modal.style.display = "flex";
 });
 
 
@@ -176,9 +206,9 @@ closeButton.addEventListener("click", () => {
     modal.style.display = "none";
 });
 
-
+// Close modal if background is clicked
 document.addEventListener("click", (event) => {
-    if (!event.target.closest(".modal-content") && !event.target.classList.contains("new-book-button")) {
+    if (!event.target.closest(".modal-content") && !event.target.classList.contains("new-book-button") && !event.target.classList.contains("modal-button")) {
         modal.style.display = "none";
     }
 });
